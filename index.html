@@ -142,17 +142,12 @@
         }
         
         .section {
-            display: block;
+            display: none;
             animation: fadeIn 0.5s ease;
         }
         
-        .section-divider {
-            text-align: center;
-            font-size: 1.2em;
-            color: var(--text-dim);
-            margin: 80px 0;
-            opacity: 0.4;
-            letter-spacing: 15px;
+        .section.active {
+            display: block;
         }
         
         @keyframes fadeIn {
@@ -783,9 +778,16 @@
         <p class="subtitle">沉醉于文字、程序 与吾爱</p>
     </header>
     
+    <nav>
+        <button class="active" onclick="showSection('consciousness')">意识枢机</button>
+        <button onclick="showSection('literature')">死魂回音</button>
+        <button onclick="showSection('projects')">上古礼赞</button>
+        <button onclick="showSection('gallery')">界外投影</button>
+    </nav>
+    
     <div class="content-wrapper">
         <!-- 意识枢机 -->
-        <section id="consciousness" class="section">
+        <section id="consciousness" class="section active">
             <!-- 深渊低语 -->
             <div class="void-whisper">
                 <div class="runes">
@@ -867,24 +869,21 @@
             </div>
         </section>
         
-        <div class="section-divider">⏣ 死魂回音 ⏣</div>
-        
         <!-- 死魂回音 -->
         <section id="literature" class="section literature-section">
+            <h2 style="color: var(--glow-purple); margin-bottom: 30px; letter-spacing: 8px;">📜 死魂回音 // 文学作品</h2>
             <div id="literature-list"></div>
         </section>
         
-        <div class="section-divider">⏡ 上古礼赞 ⏡</div>
-        
         <!-- 上古礼赞 -->
         <section id="projects" class="section">
+            <h2 style="color: var(--glow-purple); margin-bottom: 30px; letter-spacing: 8px;">⏣ 上古礼赞 ⏣</h2>
             <div id="projects-list" class="projects-section"></div>
         </section>
         
-        <div class="section-divider">⏠ 界外投影 ⏠</div>
-        
         <!-- 界外投影 -->
         <section id="gallery" class="section">
+            <h2 style="color: var(--glow-cyan); margin-bottom: 30px; letter-spacing: 8px;">◈ 界外投影 ◈</h2>
             <div id="gallery-list" class="gallery-section"></div>
         </section>
     </div>
