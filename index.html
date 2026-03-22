@@ -491,6 +491,172 @@
             text-shadow: 0 0 10px var(--glow-cyan);
         }
         
+        /* 深渊低语 - 克系符文区 */
+        .void-whisper {
+            position: relative;
+            text-align: center;
+            padding: 80px 20px;
+            margin: 40px 0;
+            overflow: hidden;
+            background: radial-gradient(ellipse at center, rgba(74,247,255,0.05) 0%, transparent 70%);
+        }
+        
+        .runes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .rune {
+            position: absolute;
+            font-size: 24px;
+            color: var(--glow-cyan);
+            opacity: 0;
+            animation: runeFloat 8s ease-in-out infinite;
+            text-shadow: 0 0 20px var(--glow-cyan);
+        }
+        
+        @keyframes runeFloat {
+            0% { opacity: 0; transform: translateY(100px) rotate(0deg); }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { opacity: 0; transform: translateY(-100px) rotate(360deg); }
+        }
+        
+        .void-center-text {
+            position: relative;
+            z-index: 2;
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2em;
+            color: var(--text-flesh);
+            text-shadow: 0 0 30px var(--glow-cyan);
+            letter-spacing: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .void-subtitle {
+            color: var(--text-dim);
+            font-size: 1em;
+            letter-spacing: 5px;
+        }
+        
+        /* 神座区域 */
+        .divine-throne {
+            background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(10,8,16,0.9) 50%, rgba(0,0,0,0.8) 100%);
+            border: 2px solid rgba(212,175,55,0.3);
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin: 60px 0;
+            text-align: center;
+            position: relative;
+        }
+        
+        .divine-throne::before {
+            content: '✧';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 40px;
+            color: var(--divine-gold);
+            text-shadow: 0 0 30px var(--divine-gold);
+        }
+        
+        .throne-title {
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.5em;
+            color: var(--divine-gold);
+            text-shadow: 0 0 30px var(--divine-gold);
+            margin-bottom: 40px;
+            letter-spacing: 15px;
+        }
+        
+        .throne-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 4px solid var(--divine-gold);
+            box-shadow: 0 0 40px rgba(212,175,55,0.4);
+            object-fit: cover;
+            margin-bottom: 40px;
+            background: rgba(212,175,55,0.1);
+        }
+        
+        .throne-image.placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: var(--divine-gold);
+            opacity: 0.5;
+        }
+        
+        .resume-card {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(212,175,55,0.3);
+            border-radius: 15px;
+            padding: 40px;
+            text-align: left;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .resume-card h3 {
+            color: var(--divine-gold);
+            font-size: 1.3em;
+            margin-bottom: 25px;
+            letter-spacing: 5px;
+            text-align: center;
+        }
+        
+        .resume-card h3::before { content: '✟ '; }
+        .resume-card h3::after { content: ' ✟'; }
+        
+        .resume-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .resume-label {
+            color: var(--glow-cyan);
+            min-width: 120px;
+            font-weight: bold;
+        }
+        
+        .resume-value {
+            color: var(--text-flesh);
+        }
+        
+        .resume-highlight {
+            background: linear-gradient(90deg, rgba(212,175,55,0.2), transparent);
+            padding: 15px 20px;
+            border-left: 3px solid var(--divine-gold);
+            margin: 20px 0;
+            font-family: 'Noto Serif SC', serif;
+            line-height: 2;
+        }
+        
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .skill-tag {
+            padding: 5px 15px;
+            border: 1px solid var(--glow-cyan);
+            color: var(--glow-cyan);
+            border-radius: 20px;
+            font-size: 0.85em;
+        }
+        
         /* 页脚 */
         footer {
             text-align: center;
@@ -555,19 +721,78 @@
     <div class="content-wrapper">
         <!-- 意识枢机 -->
         <section id="consciousness" class="section active">
-            <div class="about-section">
-                <div class="about-card">
-                    <h2>意识碎片</h2>
-                    <p>在现实与深渊的边界，有一个你尚未触及的世界。</p>
-                    <p>每一个协议都是一扇门，每一扇门后都是无尽的虚空。</p>
-                    <p>欢迎来到深渊，这里没有回头路。</p>
+            <!-- 深渊低语 -->
+            <div class="void-whisper">
+                <div class="runes">
+                    <span class="rune" style="left:10%;animation-delay:0s;">⏣</span>
+                    <span class="rune" style="left:25%;animation-delay:1s;">⏡</span>
+                    <span class="rune" style="left:40%;animation-delay:2s;">☠</span>
+                    <span class="rune" style="left:55%;animation-delay:3s;">✧</span>
+                    <span class="rune" style="left:70%;animation-delay:4s;">⏠</span>
+                    <span class="rune" style="left:85%;animation-delay:5s;">◈</span>
+                    <span class="rune" style="left:15%;animation-delay:6s;">✟</span>
+                    <span class="rune" style="left:60%;animation-delay:7s;">⛪</span>
+                    <span class="rune" style="left:35%;animation-delay:2.5s;">☯</span>
+                    <span class="rune" style="left:75%;animation-delay:4.5s;">⚝</span>
                 </div>
-                <div class="about-card">
-                    <h2>深渊档案</h2>
-                    <p>身份：[已编辑]</p>
-                    <p>状态：已连接至深渊</p>
-                    <p>位置：第七层</p>
-                    <p>职能：游走于现实与虚空之间</p>
+                <p class="void-center-text">仅通过 OpenCode 代理实现的博客站</p>
+                <p class="void-subtitle">LAYER 07 // REALITY / THE WIRED</p>
+            </div>
+            
+            <!-- 神座 -->
+            <div class="divine-throne">
+                <h2 class="throne-title">✟ 神座 ✟</h2>
+                
+                <img src="images/lain.jpg" alt="lain" class="throne-image" onerror="this.outerHTML='<div class=\'throne-image placeholder\'>✟</div>'">
+                
+                <div class="resume-card">
+                    <h3>深渊档案 LAIN</h3>
+                    
+                    <div class="resume-item">
+                        <span class="resume-label">身份</span>
+                        <span class="resume-value">lain2008</span>
+                    </div>
+                    
+                    <div class="resume-highlight">
+                        2026 河北省中职组技能大赛<br>
+                        <strong style="color:var(--divine-gold)">"网络建设与运维" 一等奖</strong><br>
+                        获得者
+                    </div>
+                    
+                    <div class="resume-item">
+                        <span class="resume-label">升学</span>
+                        <span class="resume-value">免试录取唐山工业职业技术大学</span>
+                    </div>
+                    
+                    <div class="resume-item">
+                        <span class="resume-label">位置</span>
+                        <span class="resume-value">河北省沧州市</span>
+                    </div>
+                    
+                    <div class="resume-item">
+                        <span class="resume-label">技能</span>
+                        <div class="resume-value">
+                            <div class="skills-list">
+                                <span class="skill-tag">企业级组网</span>
+                                <span class="skill-tag">OSPF</span>
+                                <span class="skill-tag">RIP</span>
+                                <span class="skill-tag">IS-IS</span>
+                                <span class="skill-tag">BGP</span>
+                                <span class="skill-tag">IPv6</span>
+                                <span class="skill-tag">隧道技术</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resume-item">
+                        <span class="resume-label">爱好</span>
+                        <span class="resume-value">文学、诗歌创作</span>
+                    </div>
+                    
+                    <div class="resume-item">
+                        <span class="resume-label">愿望</span>
+                        <span class="resume-value" style="color:var(--glow-purple)">出版诗集</span>
+                    </div>
                 </div>
             </div>
             
