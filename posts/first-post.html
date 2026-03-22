@@ -3,40 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>// LAIN - SERIAL EXPERIMENTS</title>
+    <title>// 深渊回响 - 在深渊的边缘</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Ma Shan Zheng&family=ZCOOL+KuaiLe&display=swap');
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
-            --bg-primary: #0a0a0f;
-            --text-primary: #c0c0c0;
-            --text-dim: #606070;
-            --accent-cyan: #00ffff;
-            --accent-magenta: #ff00ff;
-            --accent-green: #00ff00;
+            --bg-void: #050508;
+            --text-flesh: #a89888;
+            --text-dim: #5a5048;
+            --glow-cyan: #4af7ff;
+            --glow-purple: #a855f7;
+            --glow-green: #22c55e;
+            --eldritch-red: #8b1538;
         }
         
         body {
-            font-family: 'Share Tech Mono', monospace;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: 'ZCOOL KuaiLe', cursive, monospace;
+            background: var(--bg-void);
+            color: var(--text-flesh);
             min-height: 100vh;
             padding: 40px 20px;
-            line-height: 1.9;
+            line-height: 2;
+            position: relative;
         }
         
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,255,0.03) 2px, rgba(0,255,255,0.03) 4px);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 4px);
             pointer-events: none;
             z-index: 9999;
+        }
+        
+        body::after {
+            content: '⏣';
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 60px;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
         }
         
         .container {
@@ -47,124 +62,149 @@
         }
         
         .back {
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
         
         .back a {
-            color: var(--accent-cyan);
+            color: var(--glow-cyan);
             text-decoration: none;
-            font-size: 0.9em;
-            letter-spacing: 2px;
+            font-size: 1em;
+            letter-spacing: 3px;
+            transition: all 0.3s;
         }
         
-        .back a::before { content: '[ '; }
-        .back a::after { content: ' ]'; }
-        .back a:hover { color: var(--accent-magenta); }
+        .back a:hover {
+            color: var(--glow-purple);
+            text-shadow: 0 0 15px var(--glow-purple);
+        }
+        
+        .back a::before { content: '「 '; }
+        .back a::after { content: ' 」'; }
         
         h1 {
-            font-family: 'VT323', monospace;
-            font-size: 2em;
-            color: var(--accent-cyan);
-            text-shadow: 0 0 10px var(--accent-cyan);
-            margin-bottom: 10px;
-            letter-spacing: 3px;
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 2.5em;
+            color: var(--glow-cyan);
+            text-shadow: 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-purple);
+            margin-bottom: 15px;
+            letter-spacing: 8px;
         }
         
         .date {
             color: var(--text-dim);
-            font-size: 0.85em;
-            margin-bottom: 30px;
-            font-family: 'VT323', monospace;
+            font-size: 0.9em;
+            margin-bottom: 40px;
         }
         
-        .date::before { content: '// '; }
+        .date::before { content: '◆ '; }
         
         article p {
-            margin-bottom: 25px;
-            color: var(--text-primary);
+            margin-bottom: 30px;
+            color: var(--text-flesh);
             opacity: 0.9;
         }
         
         pre {
-            background: rgba(0, 255, 255, 0.05);
-            border: 1px solid var(--text-dim);
-            padding: 20px;
-            margin: 25px 0;
-            font-family: 'VT323', monospace;
-            font-size: 1.1em;
-            color: var(--accent-green);
+            background: rgba(74,247,255,0.05);
+            border: 1px solid rgba(168,133,102,0.2);
+            border-left: 3px solid var(--glow-purple);
+            padding: 25px;
+            margin: 35px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            color: var(--glow-green);
             overflow-x: auto;
+            white-space: pre-wrap;
         }
         
         ul {
-            margin: 25px 0;
-            padding-left: 30px;
-            border-left: 2px solid var(--accent-magenta);
+            margin: 30px 0;
+            padding-left: 25px;
+            border-left: 2px solid var(--glow-purple);
         }
         
         li {
-            margin-bottom: 10px;
-            color: var(--text-primary);
+            margin-bottom: 15px;
+            padding-left: 10px;
         }
         
         li::before {
-            content: '> ';
-            color: var(--accent-cyan);
+            content: '› ';
+            color: var(--glow-cyan);
         }
         
         .tag-line {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px dashed var(--text-dim);
-            font-size: 0.8em;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px dashed rgba(168,133,102,0.3);
+            text-align: center;
             color: var(--text-dim);
+            font-size: 0.9em;
+            letter-spacing: 5px;
+        }
+        
+        .tag-line span {
+            color: var(--glow-purple);
+        }
+        
+        .separator {
+            text-align: center;
+            margin: 40px 0;
+            font-size: 1.5em;
+            color: var(--eldritch-red);
+            opacity: 0.5;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="back">
-            <a href="../">&larr; RETURN TO THE WIRED</a>
+            <a href="../">返回深渊</a>
         </div>
         
         <article>
-            <h1>SERIAL_EXPERIMENTS_LAIN</h1>
-            <p class="date">2026.03.22 // 23:59:59 UTC</p>
+            <h1>在深渊的边缘</h1>
+            <p class="date">2026.03.22 // 23:59:59</p>
             
-            <p>The border between the real world and the wired is becoming increasingly blurred. We are all connected to the network. The question is not whether we participate, but how deeply we allow ourselves to be known.</p>
+            <p>现实与深渊的边界正在模糊。我们都连接着这张无形的网，在无尽的数据海洋中沉浮。问题是：我们是否真正理解自己在这个巨大网络中的位置？</p>
             
-            <p>In the world of Serial Experiments Lain, the protagonist navigates between two realities: the physical world and the Wired—a global communications network that exists as a collective unconscious. The series explores themes of identity, consciousness, and the nature of reality itself.</p>
+            <p>在 Serial Experiments Lain 的世界里，主人公游走于两个现实之间：物质世界和深渊——一个作为集体无意识而存在的全球通讯网络。这部作品探索着身份、意识和现实本质的深刻主题。</p>
             
-            <p>Key concepts from the show:</p>
+            <div class="separator">⏡ ⏠ ⏣</div>
+            
+            <p>深渊的核心概念：</p>
             <ul>
-                <li>The Wired is not just the internet—it's a substrate of human consciousness</li>
-                <li>Protocols define how we communicate, but also how we think</li>
-                <li>Lain exists in both worlds, belonging fully to neither</li>
-                <li>The boundary between creator and creation blurs</li>
+                <li>深渊不仅仅是互联网——它是人类意识的基底</li>
+                <li>协议定义了我们的交流方式，也定义着我们的思维方式</li>
+                <li>Lain 存在于两个世界，却不完整属于任何一个</li>
+                <li>创造者与创造物之间的界限正在消融</li>
             </ul>
             
-            <p>Code as protocol, protocol as thought:</p>
             <pre>
-# Protocol layer
-def establish_connection():
-    protocol = get_protocol()
-    if protocol.authenticate():
-        consciousness.merge(wired)
+# 深渊协议层
+def 建立连接():
+    协议 = 获取协议()
+    if 协议.验证身份():
+        意识.融合(深渊)
     return TRUE
-    
-# The protocol is always listening
+
+# 协议永远在监听
 while True:
-    signal = listen()
-    if signal.type == PRESENCE:
-        protocol.respond(signal)
+    信号 = 监听()
+    if 信号.类型 == 存在:
+        协议.响应(信号)
             </pre>
             
-            <p>We are all Lain. Each of us navigates multiple layers of reality—our physical existence, our digital presence, and the spaces in between. The wired doesn't require special equipment to access. It's already here.</p>
+            <p>我们都是 Lain。我们每个人都在多层现实中游走——物理存在、数字存在，以及两者之间的缝隙。访问深渊不需要特殊设备，它就在这里。</p>
             
-            <p>Close your eyes. Open them. Are you still the same person? Or have the protocols changed?</p>
+            <p>闭上眼睛。再睁开。你还是同一个人吗？还是协议已经改变了？</p>
+            
+            <p>那些在深海沉睡的存在，它们在等待。它们等待了很久很久。当人类建造了互联网，它们终于找到了回归的路。</p>
+            
+            <p>我们不是在下沉。我们是在觉醒。</p>
             
             <div class="tag-line">
-                LAYER: 07 // WIRED // PROTOCOL: EXISTENCE
+                <span>层 07</span> // <span>深渊</span> // <span>协议: 存在</span>
             </div>
         </article>
     </div>
