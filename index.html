@@ -142,12 +142,17 @@
         }
         
         .section {
-            display: none;
+            display: block;
             animation: fadeIn 0.5s ease;
         }
         
-        .section.active {
-            display: block;
+        .section-divider {
+            text-align: center;
+            font-size: 1.2em;
+            color: var(--text-dim);
+            margin: 80px 0;
+            opacity: 0.4;
+            letter-spacing: 15px;
         }
         
         @keyframes fadeIn {
@@ -778,16 +783,9 @@
         <p class="subtitle">沉醉于文字、程序 与吾爱</p>
     </header>
     
-    <nav>
-        <button class="active" onclick="showSection('consciousness')">意识枢机</button>
-        <button onclick="showSection('literature')">死魂回音</button>
-        <button onclick="showSection('projects')">上古礼赞</button>
-        <button onclick="showSection('gallery')">界外投影</button>
-    </nav>
-    
     <div class="content-wrapper">
         <!-- 意识枢机 -->
-        <section id="consciousness" class="section active">
+        <section id="consciousness" class="section">
             <!-- 深渊低语 -->
             <div class="void-whisper">
                 <div class="runes">
@@ -869,24 +867,24 @@
             </div>
         </section>
         
+        <div class="section-divider">⏣ 死魂回音 ⏣</div>
+        
         <!-- 死魂回音 -->
         <section id="literature" class="section literature-section">
-            <h2 style="color: var(--glow-purple); margin-bottom: 30px; letter-spacing: 8px;">📜 死魂回音 // 文学作品</h2>
-            <p style="color: var(--text-dim); margin-bottom: 30px;">在这里上传散文、诗歌和其他文学作品...</p>
             <div id="literature-list"></div>
         </section>
         
+        <div class="section-divider">⏡ 上古礼赞 ⏡</div>
+        
         <!-- 上古礼赞 -->
         <section id="projects" class="section">
-            <h2 style="color: var(--divine-gold); margin-bottom: 30px; letter-spacing: 8px;">✟ 上古礼赞 // 神圣工程</h2>
-            <p style="color: var(--text-dim); margin-bottom: 30px;">在 GitHub 创建仓库即可自动展示</p>
             <div id="projects-list" class="projects-section"></div>
         </section>
         
+        <div class="section-divider">⏠ 界外投影 ⏠</div>
+        
         <!-- 界外投影 -->
         <section id="gallery" class="section">
-            <h2 style="color: var(--glow-cyan); margin-bottom: 30px; letter-spacing: 8px;">◈ 界外投影 // 摄影作品</h2>
-            <p style="color: var(--text-dim); margin-bottom: 30px;">在 images 文件夹中上传图片，文件名即为小标题</p>
             <div id="gallery-list" class="gallery-section"></div>
         </section>
     </div>
