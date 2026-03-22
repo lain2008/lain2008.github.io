@@ -896,24 +896,6 @@
     </footer>
     
     <script>
-        // 思想残片
-        const posts = [
-            {
-                title: "在深渊的边缘",
-                date: "2026.03.22",
-                excerpt: "现实与深渊的边界正在模糊。我们都连接着，在无尽的数据海洋中沉浮。",
-                url: "posts/first-post.html",
-                tags: ["深渊", "协议", "存在"]
-            },
-            {
-                title: "意识的边界",
-                date: "2026.03.20",
-                excerpt: "理解协议的层次结构。每一个数据包都在讲述一个故事。",
-                url: "posts/second-post.html",
-                tags: ["网络", "数据"]
-            }
-        ];
-        
         // 文学作品
         const literature = [
             {
@@ -1049,19 +1031,6 @@
             } catch (e) {
                 container.innerHTML = '<p style="text-align:center;color:var(--text-dim);padding:60px;">加载失败，请刷新重试</p>';
             }
-        }
-        
-        // 渲染函数
-        function renderPosts() {
-            const container = document.getElementById('posts-list');
-            container.innerHTML = posts.map((post, i) => `
-                <div class="card" onclick="location.href='${post.url}'">
-                    <h2>${String(i+1).padStart(2,'0')} // ${post.title}</h2>
-                    <p class="date">⌘ ${post.date} // 时间戳</p>
-                    <p class="excerpt">${post.excerpt}</p>
-                    <div class="tags">${post.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
-                </div>
-            `).join('');
         }
         
         function renderLiterature() {
