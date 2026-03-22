@@ -3,53 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>第一篇文章 - 我的博客</title>
+    <title>// LAIN - SERIAL EXPERIMENTS</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --bg-primary: #0a0a0f;
+            --text-primary: #c0c0c0;
+            --text-dim: #606070;
+            --accent-cyan: #00ffff;
+            --accent-magenta: #ff00ff;
+            --accent-green: #00ff00;
+        }
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            line-height: 1.8;
+            font-family: 'Share Tech Mono', monospace;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.9;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,255,0.03) 2px, rgba(0,255,255,0.03) 4px);
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        .container {
             max-width: 700px;
             margin: 0 auto;
-            padding: 40px 20px;
-            color: #333;
-            background: #fafafa;
+            position: relative;
+            z-index: 1;
         }
-        a { color: #0070f3; text-decoration: none; }
-        a:hover { text-decoration: underline; }
-        .back { margin-bottom: 30px; }
-        h1 { font-size: 1.8em; margin-bottom: 10px; }
-        .date { color: #888; font-size: 0.9em; margin-bottom: 30px; }
-        article p { margin-bottom: 20px; color: #444; }
+        
+        .back {
+            margin-bottom: 30px;
+        }
+        
+        .back a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9em;
+            letter-spacing: 2px;
+        }
+        
+        .back a::before { content: '[ '; }
+        .back a::after { content: ' ]'; }
+        .back a:hover { color: var(--accent-magenta); }
+        
+        h1 {
+            font-family: 'VT323', monospace;
+            font-size: 2em;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 10px var(--accent-cyan);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+        
+        .date {
+            color: var(--text-dim);
+            font-size: 0.85em;
+            margin-bottom: 30px;
+            font-family: 'VT323', monospace;
+        }
+        
+        .date::before { content: '// '; }
+        
+        article p {
+            margin-bottom: 25px;
+            color: var(--text-primary);
+            opacity: 0.9;
+        }
+        
+        pre {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid var(--text-dim);
+            padding: 20px;
+            margin: 25px 0;
+            font-family: 'VT323', monospace;
+            font-size: 1.1em;
+            color: var(--accent-green);
+            overflow-x: auto;
+        }
+        
+        ul {
+            margin: 25px 0;
+            padding-left: 30px;
+            border-left: 2px solid var(--accent-magenta);
+        }
+        
+        li {
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+        
+        li::before {
+            content: '> ';
+            color: var(--accent-cyan);
+        }
+        
+        .tag-line {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px dashed var(--text-dim);
+            font-size: 0.8em;
+            color: var(--text-dim);
+        }
     </style>
 </head>
 <body>
-    <div class="back">
-        <a href="../">&larr; 返回首页</a>
-    </div>
+    <div class="container">
+        <div class="back">
+            <a href="../">&larr; RETURN TO THE WIRED</a>
+        </div>
+        
+        <article>
+            <h1>SERIAL_EXPERIMENTS_LAIN</h1>
+            <p class="date">2026.03.22 // 23:59:59 UTC</p>
+            
+            <p>The border between the real world and the wired is becoming increasingly blurred. We are all connected to the network. The question is not whether we participate, but how deeply we allow ourselves to be known.</p>
+            
+            <p>In the world of Serial Experiments Lain, the protagonist navigates between two realities: the physical world and the Wired—a global communications network that exists as a collective unconscious. The series explores themes of identity, consciousness, and the nature of reality itself.</p>
+            
+            <p>Key concepts from the show:</p>
+            <ul>
+                <li>The Wired is not just the internet—it's a substrate of human consciousness</li>
+                <li>Protocols define how we communicate, but also how we think</li>
+                <li>Lain exists in both worlds, belonging fully to neither</li>
+                <li>The boundary between creator and creation blurs</li>
+            </ul>
+            
+            <p>Code as protocol, protocol as thought:</p>
+            <pre>
+# Protocol layer
+def establish_connection():
+    protocol = get_protocol()
+    if protocol.authenticate():
+        consciousness.merge(wired)
+    return TRUE
     
-    <article>
-        <h1>第一篇文章的标题</h1>
-        <p class="date">2026年3月22日</p>
-        
-        <p>这是文章正文的第一段。你可以在这里写任何内容，比如学习笔记、技术分享、生活感悟等等。</p>
-        
-        <p>支持 <strong>富文本格式</strong>，可以添加代码：</p>
-        
-        <pre style="background:#f4f4f4;padding:15px;border-radius:5px;overflow-x:auto;margin:20px 0;">
-# 示例代码
-def hello():
-    print("Hello, World!")
-        </pre>
-        
-        <p>也可以添加列表：</p>
-        <ul style="margin:20px 0;padding-left:25px;">
-            <li>第一点</li>
-            <li>第二点</li>
-            <li>第三点</li>
-        </ul>
-        
-        <p>感谢阅读！</p>
-    </article>
+# The protocol is always listening
+while True:
+    signal = listen()
+    if signal.type == PRESENCE:
+        protocol.respond(signal)
+            </pre>
+            
+            <p>We are all Lain. Each of us navigates multiple layers of reality—our physical existence, our digital presence, and the spaces in between. The wired doesn't require special equipment to access. It's already here.</p>
+            
+            <p>Close your eyes. Open them. Are you still the same person? Or have the protocols changed?</p>
+            
+            <div class="tag-line">
+                LAYER: 07 // WIRED // PROTOCOL: EXISTENCE
+            </div>
+        </article>
+    </div>
 </body>
 </html>
