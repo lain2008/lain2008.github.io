@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>// 深渊回响</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Ma Shan Zheng&family=ZCOOL+KuaiLe&family=Noto+Serif+SC:wght@400;700&display=swap');
         
@@ -1259,20 +1260,22 @@
                         <div style="text-align:center;color:rgba(150,130,110,0.5);padding:60px;">
                             <p style="font-size:2em;margin-bottom:20px;">📜</p>
                             <p>暂无声响，上传作品到 writings 文件夹即可召唤</p>
-                            <p style="font-size:0.8em;margin-top:20px;">支持 .md 和 .txt 格式</p>
+                            <p style="font-size:0.8em;margin-top:20px;">支持 .md .txt .docx .doc 格式</p>
                         </div>
                     `;
                     return;
                 }
                 
+                const textExts = /\.(md|txt)$/i;
+                const docxExts = /\.(docx)$/i;
                 const works = files
-                    .filter(f => /\.(md|txt)$/i.test(f.name))
+                    .filter(f => textExts.test(f.name) || docxExts.test(f.name))
                     .sort((a, b) => b.name.localeCompare(a.name, 'zh'));
                 
                 if (works.length === 0) {
                     document.getElementById('lit-list').innerHTML = `
                         <div style="text-align:center;color:rgba(150,130,110,0.5);padding:60px;">
-                            <p>请上传 .md 或 .txt 文件到 writings 文件夹</p>
+                            <p>请上传 .md .txt .docx 文件到 writings 文件夹</p>
                         </div>
                     `;
                     return;
@@ -1280,9 +1283,21 @@
                 
                 const listContainer = document.getElementById('lit-list');
                 for (const file of works) {
-                    const content = await fetch(file.download_url).then(r => r.text());
-                    const preview = content.substring(0, 200).replace(/[#*_`]/g, '');
-                    const title = file.name.replace(/\.(md|txt)$/i, '');
+                    const isDocx = docxExts.test(file.name);
+                    let content, preview;
+                    
+                    if (isDocx) {
+                        const rawUrl = file.download_url;
+                        const arrayBuffer = await fetch(rawUrl).then(r => r.arrayBuffer());
+                        const result = await mammoth.convertToHtml({ arrayBuffer });
+                        content = result.value;
+                        preview = content.replace(/<[^>]+>/g, '').substring(0, 200);
+                    } else {
+                        content = await fetch(file.download_url).then(r => r.text());
+                        preview = content.replace(/[#*_`>\-]/g, '').substring(0, 200);
+                    }
+                    
+                    const title = file.name.replace(/\.(md|txt|docx|doc)$/i, '');
                     const date = new Date(file.created_at).toLocaleDateString('zh-CN', { year: 'numeric', month: 'numeric', day: 'numeric' });
                     
                     const card = document.createElement('div');
@@ -1292,7 +1307,7 @@
                         <p class="preview">${preview}...</p>
                         <p class="meta">† ${date}</p>
                     `;
-                    card.onclick = () => openReader(title, content, date);
+                    card.onclick = () => openReader(title, content, date, isDocx);
                     listContainer.appendChild(card);
                 }
             } catch (e) {
@@ -1305,28 +1320,40 @@
             }
         }
         
-        function openReader(title, content, date) {
+        function openReader(title, content, date, isDocx) {
             const reader = document.getElementById('reader');
             const body = reader.querySelector('.reader-body');
             
-            const htmlContent = content
-                .replace(/^#\s+(.+)$/gm, '<h1 style="font-family:\'Ma Shan Zheng\',cursive;font-size:2.5em;color:rgba(220,200,180,0.95);letter-spacing:15px;margin-bottom:50px;">$1</h1>')
-                .replace(/^##\s+(.+)$/gm, '<h2 style="color:rgba(200,180,160,0.9);font-size:1.5em;margin:30px 0 20px;">$1</h2>')
-                .replace(/^###\s+(.+)$/gm, '<h3 style="color:rgba(180,160,140,0.8);font-size:1.2em;margin:25px 0 15px;">$1</h3>')
-                .replace(/\*\*(.+?)\*\*/g, '<strong style="color:rgba(220,200,180,0.95);">$1</strong>')
-                .replace(/\*(.+?)\*/g, '<em style="color:rgba(200,180,160,0.85);">$1</em>')
-                .replace(/`(.+?)`/g, '<code style="background:rgba(200,180,160,0.1);padding:2px 6px;border-radius:3px;">$1</code>')
-                .replace(/^>\s+(.+)$/gm, '<blockquote style="border-left:3px solid rgba(200,180,160,0.3);padding-left:20px;margin:20px 0;color:rgba(180,160,140,0.8);">$1</blockquote>')
-                .replace(/^\s*[-*]\s+(.+)$/gm, '<li style="margin:10px 0 10px 30px;">$1</li>')
-                .replace(/\n\n/g, '</p><p style="margin-bottom:30px;text-indent:2em;">')
-                .replace(/\n/g, '<br>');
-            
-            body.innerHTML = `
-                <div class="candle">✧</div>
-                <p style="margin-bottom:30px;text-indent:2em;">${htmlContent}</p>
-                <div class="candle">✧</div>
-                <p class="prayer-end">† ${date} ✧</p>
-            `;
+            if (isDocx) {
+                body.innerHTML = `
+                    <div class="candle">✧</div>
+                    <div style="text-align:center;margin-bottom:30px;">
+                        <h1 style="font-family:'Ma Shan Zheng',cursive;font-size:2.5em;color:rgba(220,200,180,0.95);letter-spacing:15px;margin-bottom:30px;">${title}</h1>
+                    </div>
+                    <div style="line-height:2.5;font-size:1.1em;">${content}</div>
+                    <div class="candle">✧</div>
+                    <p class="prayer-end">† ${date} ✧</p>
+                `;
+            } else {
+                const htmlContent = content
+                    .replace(/^#\s+(.+)$/gm, '<h1 style="font-family:\'Ma Shan Zheng\',cursive;font-size:2.5em;color:rgba(220,200,180,0.95);letter-spacing:15px;margin-bottom:50px;">$1</h1>')
+                    .replace(/^##\s+(.+)$/gm, '<h2 style="color:rgba(200,180,160,0.9);font-size:1.5em;margin:30px 0 20px;">$1</h2>')
+                    .replace(/^###\s+(.+)$/gm, '<h3 style="color:rgba(180,160,140,0.8);font-size:1.2em;margin:25px 0 15px;">$1</h3>')
+                    .replace(/\*\*(.+?)\*\*/g, '<strong style="color:rgba(220,200,180,0.95);">$1</strong>')
+                    .replace(/\*(.+?)\*/g, '<em style="color:rgba(200,180,160,0.85);">$1</em>')
+                    .replace(/`(.+?)`/g, '<code style="background:rgba(200,180,160,0.1);padding:2px 6px;border-radius:3px;">$1</code>')
+                    .replace(/^>\s+(.+)$/gm, '<blockquote style="border-left:3px solid rgba(200,180,160,0.3);padding-left:20px;margin:20px 0;color:rgba(180,160,140,0.8);">$1</blockquote>')
+                    .replace(/^\s*[-*]\s+(.+)$/gm, '<li style="margin:10px 0 10px 30px;">$1</li>')
+                    .replace(/\n\n/g, '</p><p style="margin-bottom:30px;text-indent:2em;">')
+                    .replace(/\n/g, '<br>');
+                
+                body.innerHTML = `
+                    <div class="candle">✧</div>
+                    <p style="margin-bottom:30px;text-indent:2em;">${htmlContent}</p>
+                    <div class="candle">✧</div>
+                    <p class="prayer-end">† ${date} ✧</p>
+                `;
+            }
             
             reader.classList.add('active');
             document.body.style.overflow = 'hidden';
