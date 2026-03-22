@@ -547,8 +547,6 @@
         /* 神座区域 */
         .divine-throne {
             background: linear-gradient(135deg, rgba(74,247,255,0.03) 0%, transparent 50%, rgba(168,85,247,0.03) 100%);
-            border: 2px solid rgba(168,133,102,0.3);
-            border-radius: 20px;
             padding: 60px 40px;
             margin: 60px 0;
             text-align: center;
@@ -743,10 +741,32 @@
         }
         
         @media (max-width: 600px) {
-            h1 { font-size: 2em; letter-spacing: 10px; }
-            nav { flex-wrap: wrap; gap: 15px; }
-            nav button { font-size: 0.9em; padding: 8px 12px; }
+            body { padding: 10px; }
+            h1 { font-size: 1.8em; letter-spacing: 8px; }
+            .subtitle { font-size: 0.8em; letter-spacing: 3px; }
+            nav { flex-wrap: wrap; gap: 10px; padding: 10px; }
+            nav button { font-size: 0.85em; padding: 6px 10px; letter-spacing: 2px; }
+            nav button::before, nav button::after { display: none; }
+            .divine-throne { padding: 30px 15px; margin: 30px 0; }
+            .throne-title { font-size: 1.5em; letter-spacing: 8px; }
+            .throne-image { width: 120px; height: 120px; margin-bottom: 25px; }
+            .resume-card { padding: 20px 15px; }
+            .resume-card h3 { font-size: 1.1em; letter-spacing: 3px; }
+            .resume-item { flex-direction: column; gap: 5px; }
+            .resume-label { min-width: auto; }
+            .resume-highlight { padding: 10px 15px; font-size: 0.9em; }
+            .skills-list { gap: 5px; }
+            .skill-tag { font-size: 0.75em; padding: 3px 8px; }
+            .arknight-section { padding: 20px 10px; margin: 20px 0; }
+            .arknight-image { max-height: 300px; border-radius: 10px; }
             .gallery-section { grid-template-columns: 1fr; }
+            .void-whisper { padding: 40px 15px; }
+            .void-center-text { font-size: 1.2em; letter-spacing: 5px; }
+            .void-subtitle { font-size: 0.75em; letter-spacing: 2px; }
+            .rune { font-size: 18px; }
+            .literature-section .card { padding: 15px; }
+            .literature-section .card h2 { font-size: 1.1em; }
+            footer { padding: 30px 15px; }
         }
     </style>
 </head>
