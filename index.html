@@ -1096,10 +1096,23 @@
         }
         
         // 初始化
-        renderPosts();
-        renderLiterature();
-        renderProjects();
-        renderGallery();
+        try {
+            renderLiterature();
+        } catch(e) {
+            document.getElementById('literature-list').innerHTML = '<p style="text-align:center;color:var(--text-dim);padding:60px;">加载中...</p>';
+        }
+        
+        try {
+            renderProjects();
+        } catch(e) {
+            document.getElementById('projects-list').innerHTML = '<p style="text-align:center;color:var(--text-dim);padding:60px;">加载中...</p>';
+        }
+        
+        try {
+            renderGallery();
+        } catch(e) {
+            document.getElementById('gallery-list').innerHTML = '<p style="text-align:center;color:var(--text-dim);padding:60px;">加载中...</p>';
+        }
     </script>
 </body>
 </html>
