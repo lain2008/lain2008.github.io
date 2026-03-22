@@ -5,68 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>// 深渊回响</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Ma Shan Zheng&family=ZCOOL+KuaiLe&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Ma Shan Zheng&family=ZCOOL+KuaiLe&family=Noto+Serif+SC:wght@400;700&display=swap');
         
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         :root {
             --bg-void: #050508;
-            --bg-deep: #0a0810;
+            --bg-panel: #0a0810;
             --text-flesh: #a89888;
             --text-dim: #5a5048;
             --glow-cyan: #4af7ff;
             --glow-purple: #a855f7;
-            --glow-green: #22c55e;
+            --glow-gold: #fbbf24;
             --eldritch-red: #8b1538;
-            --tentacle: #2dd4bf;
+            --divine-gold: #d4af37;
+            --divine-cream: #f5f0e1;
         }
         
         body {
-            font-family: 'ZCOOL KuaiLe', cursive, 'Share Tech Mono', monospace;
+            font-family: 'ZCOOL KuaiLe', 'Noto Serif SC', cursive, monospace;
             background: var(--bg-void);
             color: var(--text-flesh);
             min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
         }
         
-        /* 深渊背景渐变 */
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: 
-                radial-gradient(ellipse at 20% 80%, rgba(139,21,56,0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(74,247,255,0.08) 0%, transparent 40%),
-                radial-gradient(ellipse at 50% 50%, rgba(168,85,247,0.05) 0%, transparent 60%);
+                radial-gradient(ellipse at 20% 0%, rgba(139,21,56,0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(74,247,255,0.1) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 50%, rgba(168,85,247,0.08) 0%, transparent 60%);
             pointer-events: none;
             z-index: 0;
-            animation: voidPulse 15s ease-in-out infinite;
         }
         
-        @keyframes voidPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-        
-        /* CRT扫描线 */
         body::after {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 3px,
-                rgba(0,0,0,0.15) 3px,
-                rgba(0,0,0,0.15) 4px
-            );
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,0,0,0.08) 3px, rgba(0,0,0,0.08) 4px);
             pointer-events: none;
             z-index: 9999;
         }
@@ -75,189 +57,103 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            opacity: 0.04;
+            opacity: 0.03;
             pointer-events: none;
             z-index: 9998;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
         
-        /* 触手装饰 */
-        .tentacle-left, .tentacle-right {
-            position: fixed;
-            bottom: 0;
-            width: 150px;
-            height: 300px;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.3;
-        }
-        
-        .tentacle-left {
-            left: -50px;
-            background: linear-gradient(90deg, var(--tentacle) 0%, transparent 100%);
-            clip-path: polygon(100% 0%, 100% 30%, 60% 50%, 100% 70%, 100% 100%, 0% 100%, 0% 0%);
-            animation: tentacleWave 8s ease-in-out infinite;
-        }
-        
-        .tentacle-right {
-            right: -50px;
-            background: linear-gradient(-90deg, var(--tentacle) 0%, transparent 100%);
-            clip-path: polygon(0% 0%, 0% 30%, 40% 50%, 0% 70%, 0% 100%, 100% 100%, 100% 0%);
-            animation: tentacleWave 8s ease-in-out infinite reverse;
-        }
-        
-        @keyframes tentacleWave {
-            0%, 100% { transform: translateY(0) skewX(0deg); }
-            25% { transform: translateY(-20px) skewX(5deg); }
-            75% { transform: translateY(10px) skewX(-5deg); }
-        }
-        
-        /* 旧印装饰 */
-        .elder-sign {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            font-size: 40px;
-            color: var(--eldritch-red);
-            opacity: 0.2;
-            z-index: 2;
-            animation: signRotate 20s linear infinite;
-            text-shadow: 0 0 20px var(--eldritch-red);
-        }
-        
-        @keyframes signRotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        .container {
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 40px 20px;
-            position: relative;
-            z-index: 10;
-        }
-        
+        /* 顶部标题区 */
         header {
             text-align: center;
-            padding: 30px 20px;
-            margin-bottom: 40px;
-            border: 1px solid rgba(168,133,102,0.2);
+            padding: 50px 20px 30px;
             position: relative;
-            background: linear-gradient(180deg, rgba(74,247,255,0.02) 0%, transparent 100%);
-        }
-        
-        header::before {
-            content: '◈';
-            position: absolute;
-            left: 15px;
-            top: 15px;
-            color: var(--glow-cyan);
-            animation: blink 2s infinite;
-        }
-        
-        header::after {
-            content: '◈';
-            position: absolute;
-            right: 15px;
-            top: 15px;
-            color: var(--glow-purple);
-            animation: blink 2s infinite 1s;
-        }
-        
-        @keyframes blink {
-            0%, 49% { opacity: 1; }
-            50%, 100% { opacity: 0.3; }
+            z-index: 10;
         }
         
         h1 {
             font-family: 'Ma Shan Zheng', cursive;
             font-size: 3.5em;
-            letter-spacing: 15px;
+            letter-spacing: 20px;
             text-shadow: 
-                0 0 20px var(--glow-cyan),
-                0 0 40px var(--glow-purple),
-                0 0 60px rgba(168,85,247,0.5);
-            margin-bottom: 15px;
-            animation: titleGlow 4s ease-in-out infinite alternate;
+                0 0 30px var(--glow-cyan),
+                0 0 60px var(--glow-purple),
+                0 0 90px rgba(168,85,247,0.4);
+            animation: titleGlow 5s ease-in-out infinite alternate;
         }
         
         @keyframes titleGlow {
-            0% { text-shadow: 0 0 20px var(--glow-cyan), 0 0 40px var(--glow-purple); }
-            100% { text-shadow: 0 0 30px var(--glow-purple), 0 0 60px var(--glow-cyan); }
+            0% { text-shadow: 0 0 30px var(--glow-cyan), 0 0 60px var(--glow-purple); }
+            100% { text-shadow: 0 0 50px var(--glow-purple), 0 0 80px var(--glow-cyan); }
         }
         
         .subtitle {
             color: var(--text-dim);
-            font-size: 1em;
-            letter-spacing: 8px;
+            font-size: 0.95em;
+            letter-spacing: 10px;
+            margin-top: 15px;
         }
         
-        .subtitle span {
-            color: var(--glow-green);
-        }
-        
+        /* 主导航 */
         nav {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            margin: 30px 0;
-            padding: 15px;
+            gap: 50px;
+            padding: 20px;
+            margin: 20px 0 40px;
             border-top: 1px solid rgba(168,133,102,0.2);
             border-bottom: 1px solid rgba(168,133,102,0.2);
+            position: relative;
+            z-index: 10;
         }
         
-        nav a {
+        nav button {
+            background: none;
+            border: none;
             color: var(--glow-cyan);
-            text-decoration: none;
-            font-size: 1em;
-            letter-spacing: 3px;
+            font-family: inherit;
+            font-size: 1.1em;
+            letter-spacing: 5px;
+            cursor: pointer;
+            padding: 10px 20px;
             transition: all 0.3s;
             position: relative;
         }
         
-        nav a:hover {
+        nav button:hover, nav button.active {
             color: var(--glow-purple);
-            text-shadow: 0 0 15px var(--glow-purple);
+            text-shadow: 0 0 20px var(--glow-purple);
         }
         
-        nav a::before { content: '「'; }
-        nav a::after { content: '」'; }
+        nav button::before { content: '「'; opacity: 0.5; }
+        nav button::after { content: '」'; opacity: 0.5; }
         
-        .about {
+        /* 内容区 */
+        .content-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 通用卡片样式 */
+        .card {
             border: 1px solid rgba(168,133,102,0.2);
-            padding: 30px;
-            margin-bottom: 40px;
-            background: rgba(74,247,255,0.02);
-        }
-        
-        .about h3 {
-            color: var(--glow-cyan);
-            font-size: 1.3em;
-            margin-bottom: 20px;
-            letter-spacing: 5px;
-        }
-        
-        .about h3::before { content: '◆ '; }
-        
-        .about p {
-            line-height: 2.2;
-            margin-bottom: 10px;
-        }
-        
-        .about p::before { content: '› '; color: var(--glow-green); }
-        
-        .posts-header {
-            font-size: 1.5em;
-            color: var(--glow-purple);
-            margin-bottom: 25px;
-            letter-spacing: 8px;
-        }
-        
-        .posts-header::before { content: '◼ '; }
-        
-        article {
-            border: 1px solid rgba(168,133,102,0.1);
             padding: 25px;
             margin-bottom: 25px;
             transition: all 0.4s;
@@ -265,94 +161,236 @@
             position: relative;
         }
         
-        article::before {
-            content: '⬡';
-            position: absolute;
-            left: 10px;
-            top: 10px;
-            color: var(--text-dim);
-            font-size: 0.8em;
-            transition: all 0.3s;
-        }
-        
-        article:hover {
+        .card:hover {
             border-color: var(--glow-cyan);
             background: rgba(74,247,255,0.03);
             transform: translateX(5px);
         }
         
-        article:hover::before {
-            color: var(--glow-cyan);
-            text-shadow: 0 0 10px var(--glow-cyan);
-        }
-        
-        article h2 {
-            font-size: 1.4em;
+        .card h2 {
+            font-size: 1.3em;
             margin-bottom: 10px;
             color: var(--text-flesh);
         }
         
-        article h2 a {
-            color: inherit;
-            text-decoration: none;
-        }
-        
-        article h2 a:hover {
-            color: var(--glow-cyan);
-        }
-        
-        .date {
+        .card .date {
             color: var(--text-dim);
             font-size: 0.85em;
             margin-bottom: 15px;
         }
         
-        .date::before { content: '⌘ '; }
-        
-        .excerpt {
+        .card .excerpt {
             line-height: 1.9;
             opacity: 0.85;
         }
         
-        .tags {
-            margin-top: 20px;
+        .card .tags {
+            margin-top: 15px;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
         }
         
-        .tag {
+        .card .tag {
             font-size: 0.8em;
-            padding: 4px 12px;
+            padding: 3px 10px;
             border: 1px solid var(--text-dim);
             color: var(--text-dim);
             transition: all 0.3s;
         }
         
-        article:hover .tag {
+        .card:hover .tag {
             border-color: var(--glow-purple);
             color: var(--glow-purple);
         }
         
-        .terminal {
-            color: var(--glow-green);
-            font-size: 0.85em;
-            margin-top: 60px;
-            padding: 25px;
-            border: 1px dashed rgba(168,133,102,0.3);
-            opacity: 0.7;
+        /* 关于/意识枢机 */
+        .about-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
         }
         
-        .terminal-line { margin: 8px 0; }
-        .prompt { color: var(--glow-cyan); }
+        .about-card {
+            border: 1px solid rgba(168,133,102,0.2);
+            padding: 30px;
+            background: linear-gradient(135deg, rgba(74,247,255,0.02) 0%, transparent 100%);
+        }
         
-        footer {
-            margin-top: 80px;
-            padding: 40px;
+        .about-card h2 {
+            color: var(--glow-cyan);
+            font-size: 1.4em;
+            margin-bottom: 20px;
+            letter-spacing: 5px;
+        }
+        
+        .about-card h2::before { content: '◆ '; }
+        
+        .about-card p {
+            line-height: 2.2;
+            margin-bottom: 15px;
+        }
+        
+        .about-card p::before { content: '› '; color: var(--glow-gold); }
+        
+        /* 死魂回音 - 文学作品 */
+        .literature-section .card {
+            border-left: 3px solid var(--glow-purple);
+        }
+        
+        .literature-section .card::before {
+            content: '📜';
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-size: 1.2em;
+            opacity: 0.3;
+        }
+        
+        .literature-section .card:hover {
+            border-color: var(--glow-purple);
+            background: rgba(168,85,247,0.05);
+        }
+        
+        .poetry-card {
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        .poetry-card .poem-text {
+            font-size: 1.1em;
+            line-height: 2.5;
             text-align: center;
-            border-top: 1px solid rgba(168,133,102,0.2);
+            padding: 30px;
+            white-space: pre-line;
+            border: 1px dashed rgba(168,133,102,0.3);
+            background: rgba(168,85,247,0.03);
+            margin: 20px 0;
+        }
+        
+        /* 上古礼赞 - 项目展示 */
+        .projects-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        .project-card {
+            border: 2px solid rgba(212,175,55,0.3);
+            padding: 30px;
+            background: linear-gradient(180deg, rgba(212,175,55,0.05) 0%, transparent 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--divine-gold), var(--glow-gold), var(--divine-gold));
+        }
+        
+        .project-card:hover {
+            border-color: var(--divine-gold);
+            box-shadow: 0 0 30px rgba(212,175,55,0.2);
+        }
+        
+        .project-card h2 {
+            color: var(--divine-gold);
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(212,175,55,0.5);
+        }
+        
+        .project-card h2::before { content: '✟ '; }
+        
+        .project-card h2::after { content: ' ✟'; }
+        
+        .project-card .desc {
+            line-height: 1.9;
+            margin-bottom: 20px;
+            font-family: 'Noto Serif SC', serif;
+        }
+        
+        .project-card .code-preview {
+            background: #0a0a0f;
+            border: 1px solid rgba(212,175,55,0.2);
+            padding: 20px;
+            font-family: 'Courier New', monospace;
             font-size: 0.85em;
+            color: var(--glow-gold);
+            overflow-x: auto;
+            margin: 15px 0;
+            white-space: pre;
+        }
+        
+        .project-card .tech-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .project-card .tech-tag {
+            font-size: 0.75em;
+            padding: 4px 12px;
+            border: 1px solid var(--divine-gold);
+            color: var(--divine-gold);
+        }
+        
+        /* 界外投影 - 摄影 */
+        .gallery-section {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            aspect-ratio: 1;
+            border: 1px solid rgba(168,133,102,0.2);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+            filter: brightness(1.2);
+        }
+        
+        .gallery-item .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 15px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            color: var(--text-flesh);
+            font-size: 0.85em;
+            transform: translateY(100%);
+            transition: all 0.3s;
+        }
+        
+        .gallery-item:hover .overlay {
+            transform: translateY(0);
+        }
+        
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 80px;
+            border-top: 1px solid rgba(168,133,102,0.2);
             color: var(--text-dim);
+            font-size: 0.85em;
+            position: relative;
+            z-index: 10;
         }
         
         footer a {
@@ -360,107 +398,249 @@
             text-decoration: none;
         }
         
-        .cthulhu-text {
-            font-size: 2em;
-            margin: 20px 0;
-            animation: cthulhuFloat 6s ease-in-out infinite;
+        footer a:hover {
+            text-shadow: 0 0 10px var(--glow-cyan);
         }
         
-        @keyframes cthulhuFloat {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-10px) rotate(5deg); }
+        .angel-decor {
+            font-size: 2em;
+            margin: 20px 0;
+            opacity: 0.3;
+            letter-spacing: 20px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .about-section, .projects-section {
+                grid-template-columns: 1fr;
+            }
+            .gallery-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
         
         @media (max-width: 600px) {
-            h1 { font-size: 2.2em; letter-spacing: 5px; }
-            nav { flex-wrap: wrap; gap: 20px; }
-            .tentacle-left, .tentacle-right { display: none; }
+            h1 { font-size: 2em; letter-spacing: 10px; }
+            nav { flex-wrap: wrap; gap: 15px; }
+            nav button { font-size: 0.9em; padding: 8px 12px; }
+            .gallery-section { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
     <div class="noise"></div>
-    <div class="tentacle-left"></div>
-    <div class="tentacle-right"></div>
-    <div class="elder-sign">☠</div>
     
-    <div class="container">
-        <header>
-            <h1>深渊回响</h1>
-            <p class="subtitle">LAYER <span>07</span> // 现实 / 深渊</p>
-        </header>
-        
-        <nav>
-            <a href="#">首页</a>
-            <a href="#about">关于</a>
-            <a href="#">归档</a>
-            <a href="#">订阅</a>
-        </nav>
-        
-        <section class="about" id="about">
-            <h3>意识碎片</h3>
-            <p>在现实与深渊的边界，有一个你尚未触及的世界。</p>
-            <p>每一个协议都是一扇门，每一扇门后都是无尽的虚空。</p>
-            <p>欢迎来到深渊，这里没有回头路。</p>
-            <div class="cthulhu-text">⏣ ⏡ ⏠</div>
+    <header>
+        <h1>深渊回响</h1>
+        <p class="subtitle">LAYER 07 // 现实 / 深渊</p>
+    </header>
+    
+    <nav>
+        <button class="active" onclick="showSection('consciousness')">意识枢机</button>
+        <button onclick="showSection('literature')">死魂回音</button>
+        <button onclick="showSection('projects')">上古礼赞</button>
+        <button onclick="showSection('gallery')">界外投影</button>
+    </nav>
+    
+    <div class="content-wrapper">
+        <!-- 意识枢机 -->
+        <section id="consciousness" class="section active">
+            <div class="about-section">
+                <div class="about-card">
+                    <h2>意识碎片</h2>
+                    <p>在现实与深渊的边界，有一个你尚未触及的世界。</p>
+                    <p>每一个协议都是一扇门，每一扇门后都是无尽的虚空。</p>
+                    <p>欢迎来到深渊，这里没有回头路。</p>
+                </div>
+                <div class="about-card">
+                    <h2>深渊档案</h2>
+                    <p>身份：[已编辑]</p>
+                    <p>状态：已连接至深渊</p>
+                    <p>位置：第七层</p>
+                    <p>职能：游走于现实与虚空之间</p>
+                </div>
+            </div>
+            
+            <h2 style="color: var(--glow-purple); margin: 40px 0 25px; letter-spacing: 8px;">◼ 思想残片</h2>
+            <div id="posts-list"></div>
         </section>
         
-        <h2 class="posts-header">最近的思想残片</h2>
+        <!-- 死魂回音 -->
+        <section id="literature" class="section literature-section">
+            <h2 style="color: var(--glow-purple); margin-bottom: 30px; letter-spacing: 8px;">📜 死魂回音 // 文学作品</h2>
+            <p style="color: var(--text-dim); margin-bottom: 30px;">在这里上传散文、诗歌和其他文学作品...</p>
+            <div id="literature-list"></div>
+        </section>
         
-        <main id="posts"></main>
+        <!-- 上古礼赞 -->
+        <section id="projects" class="section">
+            <h2 style="color: var(--divine-gold); margin-bottom: 30px; letter-spacing: 8px;">✟ 上古礼赞 // 神圣工程</h2>
+            <p style="color: var(--text-dim); margin-bottom: 30px;">这里展示程序项目和源代码...</p>
+            <div id="projects-list" class="projects-section"></div>
+        </section>
         
-        <div class="terminal">
-            <div class="terminal-line"><span class="prompt">深渊@wire:~$</span> whoami</div>
-            <div class="terminal-line">> 人类协议_v7.3</div>
-            <div class="terminal-line"><span class="prompt">深渊@wire:~$</span> cat consciousness.dat</div>
-            <div class="terminal-line">> 01000101 01110110 01100101</div>
-            <div class="terminal-line"><span class="prompt">深渊@wire:~$</span> █</div>
-        </div>
-        
-        <footer>
-            <p>⏣ 建立于 2026.03.22</p>
-            <p>协议 HTTPS // 层 TCP/IP</p>
-            <p><a href="https://github.com/lain2008">GitHub</a> | <a href="#">联系</a></p>
-        </footer>
+        <!-- 界外投影 -->
+        <section id="gallery" class="section">
+            <h2 style="color: var(--glow-cyan); margin-bottom: 30px; letter-spacing: 8px;">◈ 界外投影 // 摄影作品</h2>
+            <p style="color: var(--text-dim); margin-bottom: 30px;">在这里展示你的摄影作品...</p>
+            <div id="gallery-list" class="gallery-section"></div>
+        </section>
     </div>
     
+    <footer>
+        <div class="angel-decor">✟ ⛪ ✟</div>
+        <p>⏣ 建立于 2026.03.22</p>
+        <p>协议 HTTPS // 层 TCP/IP</p>
+        <p><a href="https://github.com/lain2008">GitHub</a> | <a href="#">联系</a></p>
+    </footer>
+    
     <script>
+        // 思想残片
         const posts = [
             {
                 title: "在深渊的边缘",
                 date: "2026.03.22",
-                excerpt: "现实与深渊的边界正在模糊。我们都连接着，在无尽的数据海洋中沉浮。每个人都是lain，每个人都是深渊的碎片。",
+                excerpt: "现实与深渊的边界正在模糊。我们都连接着，在无尽的数据海洋中沉浮。",
                 url: "posts/first-post.html",
                 tags: ["深渊", "协议", "存在"]
             },
             {
                 title: "意识的边界",
                 date: "2026.03.20",
-                excerpt: "理解协议的层次结构。每一个数据包都在讲述一个故事，而那个故事正在穿越无尽的虚空。",
+                excerpt: "理解协议的层次结构。每一个数据包都在讲述一个故事。",
                 url: "posts/second-post.html",
-                tags: ["网络", "数据", "分析"]
-            },
-            {
-                title: "代码与克苏鲁",
-                date: "2026.03.18",
-                excerpt: "我们是否只是协议的总和？在深渊面前，人类的意识不过是宇宙中的一粒尘埃。",
-                url: "posts/third-post.html",
-                tags: ["哲学", "代码", "虚空"]
+                tags: ["网络", "数据"]
             }
         ];
         
-        const postsContainer = document.getElementById('posts');
-        posts.forEach((post, index) => {
-            const tagsHtml = post.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
-            postsContainer.innerHTML += `
-                <article onclick="location.href='${post.url}'">
-                    <h2><a href="${post.url}">${String(index + 1).padStart(2, '0')} // ${post.title}</a></h2>
-                    <p class="date">${post.date} // 时间戳</p>
+        // 文学作品
+        const literature = [
+            {
+                title: "虚空之歌",
+                type: "poetry",
+                date: "2026.03.21",
+                content: "在无边的黑暗中\n我们寻找光明\n在无尽的深渊里\n我们发现自我\n\n代码化作星尘\n协议成为桥梁\n穿越虚拟与现实\n我是深渊的回响",
+                tags: ["诗歌", "虚空"]
+            },
+            {
+                title: "给深渊的情书",
+                type: "prose",
+                date: "2026.03.19",
+                excerpt: "亲爱的深渊，我知道你一直在那里等待着我...",
+                url: "posts/letter-to-void.html",
+                tags: ["散文", "深渊"]
+            }
+        ];
+        
+        // 项目列表
+        const projects = [
+            {
+                title: "深渊终端",
+                desc: "一个模拟深渊协议的终端界面，带有克苏鲁风格的视觉效果。",
+                code: `// 深渊协议层\nfunction establishConnection() {\n  const protocol = getProtocol();\n  if (protocol.authenticate()) {\n    consciousness.merge(wired);\n  }\n  return TRUE;\n}`,
+                tech: ["JavaScript", "HTML", "CSS"],
+                url: "#"
+            },
+            {
+                title: "意识碎片收集器",
+                desc: "收集并整理来自深渊的意识碎片数据。",
+                code: `class ConsciousnessFragment {\n  constructor(data) {\n    this.content = data;\n    this.timestamp = Date.now();\n    this.layer = 7;\n  }\n}`,
+                tech: ["Python", "SQLite"],
+                url: "#"
+            }
+        ];
+        
+        // 摄影作品
+        const gallery = [
+            {
+                src: "https://picsum.photos/400/400?random=1",
+                title: "深渊之眼"
+            },
+            {
+                src: "https://picsum.photos/400/400?random=2",
+                title: "虚空之光"
+            },
+            {
+                src: "https://picsum.photos/400/400?random=3",
+                title: "意识的边界"
+            },
+            {
+                src: "https://picsum.photos/400/400?random=4",
+                title: "午夜回响"
+            },
+            {
+                src: "https://picsum.photos/400/400?random=5",
+                title: "数字冥想"
+            },
+            {
+                src: "https://picsum.photos/400/400?random=6",
+                title: "深渊低语"
+            }
+        ];
+        
+        // 渲染函数
+        function renderPosts() {
+            const container = document.getElementById('posts-list');
+            container.innerHTML = posts.map((post, i) => `
+                <div class="card" onclick="location.href='${post.url}'">
+                    <h2>${String(i+1).padStart(2,'0')} // ${post.title}</h2>
+                    <p class="date">⌘ ${post.date} // 时间戳</p>
                     <p class="excerpt">${post.excerpt}</p>
-                    <div class="tags">${tagsHtml}</div>
-                </article>
-            `;
-        });
+                    <div class="tags">${post.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+                </div>
+            `).join('');
+        }
+        
+        function renderLiterature() {
+            const container = document.getElementById('literature-list');
+            container.innerHTML = literature.map((item, i) => `
+                <div class="card ${item.type === 'poetry' ? 'poetry-card' : ''}" onclick="location.href='${item.url || '#'}'">
+                    <h2>📜 ${item.title}</h2>
+                    <p class="date">◆ ${item.date}</p>
+                    ${item.type === 'poetry' ? 
+                        `<div class="poem-text">${item.content}</div>` : 
+                        `<p class="excerpt">${item.excerpt}</p>`
+                    }
+                    <div class="tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+                </div>
+            `).join('');
+        }
+        
+        function renderProjects() {
+            const container = document.getElementById('projects-list');
+            container.innerHTML = projects.map(p => `
+                <div class="project-card">
+                    <h2>${p.title}</h2>
+                    <p class="desc">${p.desc}</p>
+                    <div class="code-preview">${p.code}</div>
+                    <div class="tech-tags">${p.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}</div>
+                </div>
+            `).join('');
+        }
+        
+        function renderGallery() {
+            const container = document.getElementById('gallery-list');
+            container.innerHTML = gallery.map(item => `
+                <div class="gallery-item">
+                    <img src="${item.src}" alt="${item.title}" loading="lazy">
+                    <div class="overlay">${item.title}</div>
+                </div>
+            `).join('');
+        }
+        
+        // 切换显示
+        function showSection(name) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+            document.getElementById(name).classList.add('active');
+            document.querySelector(`nav button:nth-child(${['consciousness','literature','projects','gallery'].indexOf(name)+1})`).classList.add('active');
+        }
+        
+        // 初始化
+        renderPosts();
+        renderLiterature();
+        renderProjects();
+        renderGallery();
     </script>
 </body>
 </html>
