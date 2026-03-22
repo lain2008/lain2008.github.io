@@ -667,6 +667,43 @@
             font-size: 0.85em;
         }
         
+        /* 眷属演化 - 明日方舟区 */
+        .arknight-section {
+            text-align: center;
+            padding: 40px 20px;
+            margin: 40px 0;
+            position: relative;
+        }
+        
+        .arknight-image {
+            max-width: 100%;
+            max-height: 500px;
+            border-radius: 15px;
+            border: 2px solid rgba(168,133,102,0.3);
+            box-shadow: 0 0 40px rgba(74,247,255,0.2);
+            transition: all 0.5s;
+        }
+        
+        .arknight-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 60px rgba(168,85,247,0.3);
+        }
+        
+        .arknight-caption {
+            margin-top: 25px;
+            font-family: 'Ma Shan Zheng', cursive;
+            font-size: 1.8em;
+            color: var(--glow-purple);
+            letter-spacing: 10px;
+            text-shadow: 0 0 20px var(--glow-purple);
+            animation: captionGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes captionGlow {
+            0% { text-shadow: 0 0 20px var(--glow-purple); }
+            100% { text-shadow: 0 0 30px var(--glow-cyan), 0 0 50px var(--glow-purple); }
+        }
+        
         /* 页脚 */
         footer {
             text-align: center;
@@ -806,8 +843,11 @@
                 </div>
             </div>
             
-            <h2 style="color: var(--glow-purple); margin: 40px 0 25px; letter-spacing: 8px;">◼ 思想残片</h2>
-            <div id="posts-list"></div>
+            <!-- 眷属演化 -->
+            <div class="arknight-section">
+                <img src="images/来和我玩明日方舟.png" alt="来玩明日方舟" class="arknight-image" onerror="this.style.display='none'">
+                <p class="arknight-caption">眷属的演化——来玩明日方舟</p>
+            </div>
         </section>
         
         <!-- 死魂回音 -->
